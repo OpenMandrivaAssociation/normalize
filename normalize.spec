@@ -1,6 +1,9 @@
 %define name normalize
 %define version 0.7.7
-%define release %mkrel 1
+%define release %mkrel 2
+
+# --with xmms, default off
+%bcond_with	xmms
 
 Summary:   A tool for adjusting the volume of wave files
 Name:      %{name}
@@ -11,7 +14,9 @@ License:   GPL
 URL:	   http://normalize.nongnu.org/
 Group:     Sound
 BuildRoot: %{_tmppath}/%{name}-buildroot
+%if %with xmms
 BuildRequires: xmms-devel
+%endif
 BuildRequires: audiofile-devel
 BuildRequires: mad-devel
 BuildRequires: gettext-devel
@@ -30,13 +35,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %build
 touch ./AUTHORS ./ABOUT-NLS ./ChangeLog
-mkdir -p config
-echo "mkdir -p" > config/mkinstalldirs
-libtoolize -c -f
-aclocal-1.8
-automake-1.8 -a -c
-autoconf
-%configure2_5x --with-audiofile
+%configure2_5x --with-audiofile \
+%if %with xmms
+	--enable-xmms
+%else
+	--disable-xmms
+%endif
 perl -pi -e 's/mkinstalldirs\s+=.*/mkinstalldirs = mkdir -p /' po/Makefile
 %make
 
@@ -54,6 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc README NEWS THANKS TODO
 %_bindir/*
 %_mandir/man1/normalize*
+%if %with xmms
 %_libdir/xmms/Effect/librva.so
-
+%endif
 
