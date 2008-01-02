@@ -13,6 +13,7 @@ Source0:   %{name}-%{version}.tar.bz2
 License:   GPL
 URL:	   http://normalize.nongnu.org/
 Group:     Sound
+BuildRoot: %{_tmppath}/%{name}-buildroot
 %if %with xmms
 BuildRequires: xmms-devel
 %endif
