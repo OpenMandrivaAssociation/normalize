@@ -1,6 +1,6 @@
 %define name normalize
 %define version 0.7.7
-%define release %mkrel 6
+%define release %mkrel 7
 
 # --with xmms, default off
 %bcond_with	xmms
