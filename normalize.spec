@@ -1,6 +1,6 @@
 %define name normalize
 %define version 0.7.7
-%define release %mkrel 7
+%define release %mkrel 8
 
 # --with xmms, default off
 %bcond_with	xmms
@@ -10,6 +10,8 @@ Name:      %{name}
 Version:   %{version}
 Release:   %{release}
 Source0:   %{name}-%{version}.tar.bz2
+Patch0:		compressed-wav-files.dpatch
+Patch1:		fix-flac.dpatch
 License:   GPL
 URL:	   http://normalize.nongnu.org/
 Group:     Sound
@@ -29,9 +31,10 @@ creating mp3 mixes, where different recording levels on different
 albums can cause the volume to vary greatly from song to song.
 
 %prep
-rm -rf $RPM_BUILD_ROOT    
 
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 touch ./AUTHORS ./ABOUT-NLS ./ChangeLog
