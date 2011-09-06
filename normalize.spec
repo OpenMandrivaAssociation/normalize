@@ -6,9 +6,9 @@
 %bcond_with	xmms
 
 Summary:	A tool for adjusting the volume of wave files
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		normalize
+Version:	0.7.7
+Release:	11
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		compressed-wav-files.dpatch
 Patch1:		fix-flac.dpatch
@@ -16,7 +16,6 @@ Patch2:		normalize-fix-local-config.patch
 License:	GPLv2+
 URL:		http://normalize.nongnu.org/
 Group:		Sound
-BuildRoot:	%{_tmppath}/%{name}-buildroot
 %if %with xmms
 BuildRequires:	xmms-devel
 %endif
@@ -49,10 +48,9 @@ perl -pi -e 's/mkinstalldirs\s+=.*/mkinstalldirs = mkdir -p /' po/Makefile
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 %{find_lang} %{name}
-rm -f %{buildroot}/%{_libdir}/xmms/Effect/librva.la
+rm -f %{buildroot}%{_libdir}/xmms/Effect/librva.la
 
 %clean
 rm -rf %{buildroot}
