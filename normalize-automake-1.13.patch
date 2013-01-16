@@ -1,0 +1,11 @@
+--- normalize-0.7.7/configure.ac.bero	2013-01-16 01:28:06.576732892 +0100
++++ normalize-0.7.7/configure.ac	2013-01-16 01:28:12.103666533 +0100
+@@ -8,7 +8,7 @@ AC_CONFIG_AUX_DIR(config)
+ AC_CONFIG_FILES(config/Makefile)
+ 
+ AM_INIT_AUTOMAKE
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ 
+ AC_CANONICAL_HOST
+ AC_PROG_CC

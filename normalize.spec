@@ -1,23 +1,19 @@
-%define name normalize
-%define version 0.7.7
-%define release %mkrel 11
-
 # --with xmms, default off
 %bcond_with	xmms
 
 Summary:   A tool for adjusting the volume of wave files
-Name:      %{name}
-Version:   %{version}
-Release:   %{release}
-Source0:   %{name}-%{version}.tar.bz2
+Name:      normalize
+Version:   0.7.7
+Release:   12
+Source0:   http://savannah.nongnu.org/download/%name/%{name}-%{version}.tar.bz2
 Patch0:		compressed-wav-files.dpatch
 Patch1:		fix-flac.dpatch
 Patch2:		normalize-0.7.7-audiofile-pkgconfig.patch
 Patch3:   	%{name}-%{version}-m4.patch
+Patch4:		normalize-automake-1.13.patch
 License:   GPL
 URL:	   http://normalize.nongnu.org/
 Group:     Sound
-BuildRoot: %{_tmppath}/%{name}-buildroot
 %if %with xmms
 BuildRequires: xmms-devel
 %endif
@@ -25,6 +21,13 @@ BuildRequires: audiofile-devel
 BuildRequires: mad-devel
 BuildRequires: gettext-devel
 BuildRequires: automake1.8 libtool autoconf2.5
+
+%track
+prog %name = {
+	url = http://normalize.nongnu.org/
+	version = %version
+	regex = %name-(__VER__)\.tar\.bz2
+}
 
 %description
 normalize is an overly complicated tool for adjusting the volume of
@@ -35,14 +38,10 @@ albums can cause the volume to vary greatly from song to song.
 %prep
 
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%apply_patches
 
 %build
 touch ./AUTHORS ./ABOUT-NLS ./ChangeLog
-autoreconf
 libtoolize --install --copy --force --automake
 aclocal -I m4
 autoconf
