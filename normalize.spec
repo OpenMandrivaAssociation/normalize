@@ -4,7 +4,7 @@
 Summary:	A tool for adjusting the volume of wave files
 Name:		normalize
 Version:	0.7.7
-Release:	18
+Release:	19
 Group:		Sound
 License:	GPLv2
 Url:		http://normalize.nongnu.org/
