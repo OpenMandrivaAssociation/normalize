@@ -21,13 +21,6 @@ BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(audiofile)
 BuildRequires:	pkgconfig(mad)
 
-%track
-prog %{name} = {
-	url = http://normalize.nongnu.org/
-	version = %{version}
-	regex = %{name}-(__VER__)\.tar\.bz2
-}
-
 %description
 normalize is an overly complicated tool for adjusting the volume of
 wave files to a standard volume level.  This is useful for things like
@@ -42,14 +35,14 @@ touch ./AUTHORS ./ABOUT-NLS ./ChangeLog
 autoreconf -fi
 
 %build
-%configure2_5x \
+%configure \
 	--with-audiofile \
 %if %with xmms
 	--enable-xmms
 %else
 	--disable-xmms
 %endif
-perl -pi -e 's/mkinstalldirs\s+=.*/mkinstalldirs = mkdir -p /' po/Makefile
+sed -i -e 's/mkinstalldirs\s+=.*/mkinstalldirs = mkdir -p /' po/Makefile
 %make
 
 %install
@@ -64,4 +57,3 @@ rm -f %{buildroot}%{_libdir}/xmms/Effect/librva.la
 %if %with xmms
 %{_libdir}/xmms/Effect/librva.so
 %endif
-
