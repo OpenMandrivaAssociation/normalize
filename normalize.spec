@@ -29,8 +29,7 @@ albums can cause the volume to vary greatly from song to song.
 
 %prep
 
-%setup -q
-%apply_patches
+%autosetup -p1
 touch ./AUTHORS ./ABOUT-NLS ./ChangeLog
 autoreconf -fi
 
@@ -43,10 +42,10 @@ autoreconf -fi
 	--disable-xmms
 %endif
 sed -i -e 's/mkinstalldirs\s+=.*/mkinstalldirs = mkdir -p /' po/Makefile
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 %find_lang %{name}
 rm -f %{buildroot}%{_libdir}/xmms/Effect/librva.la
 
