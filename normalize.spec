@@ -7,7 +7,7 @@ Version:	0.7.7
 Release:	23
 Group:		Sound
 License:	GPLv2
-Url:		http://normalize.nongnu.org/
+Url:		https://normalize.nongnu.org/
 Source0:	http://savannah.nongnu.org/download/%{name}/%{name}-%{version}.tar.bz2
 Patch0:		compressed-wav-files.dpatch
 Patch1:		fix-flac.dpatch
